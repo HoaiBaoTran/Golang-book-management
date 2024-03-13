@@ -22,7 +22,11 @@ func NewBookHandler(bookService *service.BookService) *BookHandler {
 }
 
 func (h *BookHandler) GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
-	books, err := h.bookService.GetAllBooks()
+	fromValue := r.URL.Query().Get("from")
+	toValue := r.URL.Query().Get("to")
+
+	books, err := h.bookService.GetAllBooks(fromValue, toValue)
+
 	if err != nil {
 		fmt.Println(err)
 		http.Error(w, "Error retrieving books", http.StatusInternalServerError)

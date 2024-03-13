@@ -43,11 +43,21 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 	}
 }
 
-func (r *MemoryBookRepository) GetAllBooks() ([]domain.Book, error) {
+func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.Book, error) {
 	result := make([]domain.Book, 0, len(r.books))
 
 	sqlStatement := "SELECT * FROM book"
-	rows, err := r.DB.Query(sqlStatement)
+
+	var rows *sql.Rows
+	var err error
+
+	if fromValue != "" && toValue != "" {
+		sqlStatement += " WHERE publish_year >= $1 AND publish_year <= $2"
+		rows, err = r.DB.Query(sqlStatement, fromValue, toValue)
+	} else {
+		rows, err = r.DB.Query(sqlStatement)
+	}
+
 	if err != nil {
 		log.Fatal("Error querying the database", err)
 	}
@@ -67,7 +77,7 @@ func (r *MemoryBookRepository) GetAllBooks() ([]domain.Book, error) {
 }
 
 func (r *MemoryBookRepository) GetBookById(id int) (*domain.Book, error) {
-	r.GetAllBooks()
+	r.GetAllBooks("", "")
 	book, exist := r.books[id]
 	if !exist {
 		return nil, nil
