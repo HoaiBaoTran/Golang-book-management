@@ -159,3 +159,31 @@ func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Reque
 	json.NewEncoder(w).Encode(book)
 
 }
+
+func (h *BookHandler) UpdateMultipleBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+	var bookDataList []map[string]string
+	var response []*domain.Book
+	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	for _, bookData := range bookDataList {
+		if bookId, isContainsBookId := bookData["id"]; isContainsBookId {
+			bookIdInt, err := strconv.Atoi(bookId)
+			delete(bookData, "id")
+			if err != nil {
+				http.Error(w, "Invalid request body", http.StatusBadRequest)
+				return
+			}
+			book, err := h.bookService.UpdateBookById(bookIdInt, bookData)
+			if err != nil {
+				log.Fatal("Update fail", err)
+			}
+			response = append(response, book)
+		}
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
+}

@@ -18,4 +18,5 @@ func SetBookRouter(bookHandler *handler.BookHandler, mainRouter *mux.Router) {
 	bookRouter.HandleFunc("/{bookId}", bookHandler.DeleteBookByIdHandler).Methods("DELETE")
 	bookRouter.HandleFunc("", bookHandler.DeleteMultipleBookByIdHandler).Methods("DELETE")
 	bookRouter.HandleFunc("/{bookId}", bookHandler.UpdateBookByIdHandler).Methods("PUT")
+	bookRouter.HandleFunc("", bookHandler.UpdateMultipleBookByIdHandler).Methods("PUT")
 }

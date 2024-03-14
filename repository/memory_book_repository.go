@@ -123,6 +123,9 @@ func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]st
 	newValues := make([]string, 0, len(bookData))
 
 	for key, value := range bookData {
+		if key == "publishYear" {
+			key = "publish_year"
+		}
 		columnsToUpdate = append(columnsToUpdate, key)
 		newValues = append(newValues, value)
 		switch key {
@@ -138,6 +141,8 @@ func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]st
 				log.Fatal("Cant update", err)
 			}
 			existBook.PublishYear = publishYearInt
+		default:
+			continue
 		}
 	}
 
