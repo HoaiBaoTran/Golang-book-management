@@ -9,7 +9,7 @@ import (
 
 	"github.com/hoaibao/book-management/database"
 	"github.com/hoaibao/book-management/domain"
-	"github.com/joho/godotenv"
+	goDotEnv "github.com/joho/godotenv"
 )
 
 type MemoryBookRepository struct {
@@ -18,7 +18,7 @@ type MemoryBookRepository struct {
 }
 
 func NewMemoryBookRepository() *MemoryBookRepository {
-	err := godotenv.Load(".env")
+	err := goDotEnv.Load(".env")
 	if err != nil {
 		log.Fatal(err)
 	}

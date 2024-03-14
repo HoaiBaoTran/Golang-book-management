@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/hoaibao/book-management/domain"
 	"github.com/hoaibao/book-management/service"
 )
 
@@ -60,42 +61,40 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) {
-	var bookData map[string]string
-	if err := json.NewDecoder(r.Body).Decode(&bookData); err != nil {
+	var bookDataList []map[string]string
+	var response []*domain.Book
+	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	name, nameExists := bookData["name"]
-	isbn, isbnExists := bookData["isbn"]
-	author, authorExists := bookData["author"]
-	publishYear, publishYearExists := bookData["publishYear"]
+	for _, bookData := range bookDataList {
+		name, nameExists := bookData["name"]
+		isbn, isbnExists := bookData["isbn"]
+		author, authorExists := bookData["author"]
+		publishYear, publishYearExists := bookData["publishYear"]
 
-	if !nameExists || !isbnExists || !authorExists || !publishYearExists {
-		http.Error(w, "Missing required fields", http.StatusBadRequest)
-		return
-	}
+		if !nameExists || !isbnExists || !authorExists || !publishYearExists {
+			http.Error(w, "Missing required fields", http.StatusBadRequest)
+			return
+		}
 
-	publishYearInt, err := strconv.Atoi(publishYear)
-	if err != nil {
-		http.Error(w, "Invalid publish year", http.StatusBadRequest)
-	}
+		publishYearInt, err := strconv.Atoi(publishYear)
+		if err != nil {
+			http.Error(w, "Invalid publish year", http.StatusBadRequest)
+		}
 
-	book, err := h.bookService.CreateBook(name, isbn, author, publishYearInt)
-	if err != nil {
-		http.Error(w, "Error creating book", http.StatusInternalServerError)
-		return
+		book, err := h.bookService.CreateBook(name, isbn, author, publishYearInt)
+		if err != nil {
+			http.Error(w, "Error creating book", http.StatusInternalServerError)
+			return
+		}
+		response = append(response, book)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(book)
-}
-
-func (h *BookHandler) CreateMultipleBookHandler(w http.ResponseWriter, r *http.Request) {
-	var books []map[string]string
-	json.NewDecoder(r.Body).Decode(&books)
-	fmt.Println(books)
+	json.NewEncoder(w).Encode(response)
 }
 
 func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Request) {
