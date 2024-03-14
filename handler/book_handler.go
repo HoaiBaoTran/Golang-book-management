@@ -97,6 +97,27 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(response)
 }
 
+func (h *BookHandler) DeleteMultipleBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+	var bookDataId map[string][]int
+	var response []*domain.Book
+	if err := json.NewDecoder(r.Body).Decode(&bookDataId); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	bookIdSlice := bookDataId["data"]
+	for _, bookId := range bookIdSlice {
+		book, err := h.bookService.DeleteBookById(bookId)
+		if err != nil {
+			http.Error(w, "Error deleting book", http.StatusInternalServerError)
+		}
+		response = append(response, book)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
+}
+
 func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])
