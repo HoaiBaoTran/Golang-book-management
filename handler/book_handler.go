@@ -92,6 +92,12 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(book)
 }
 
+func (h *BookHandler) CreateMultipleBookHandler(w http.ResponseWriter, r *http.Request) {
+	var books []map[string]string
+	json.NewDecoder(r.Body).Decode(&books)
+	fmt.Println(books)
+}
+
 func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])

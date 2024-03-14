@@ -29,7 +29,7 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 		User:     os.Getenv("DB_USER"),
 		Password: os.Getenv("DB_PASSWORD"),
 		DBName:   os.Getenv("DB_NAME"),
-		SSLMode:  os.Getenv("DB_SSLMODE"),
+		SSLMode:  os.Getenv("DB_SSL_MODE"),
 	}
 
 	db, err := database.NewConnection(config)
