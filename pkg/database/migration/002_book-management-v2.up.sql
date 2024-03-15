@@ -6,6 +6,9 @@ CREATE TABLE "author" (
     birth_day DATE
 );
 
+insert into author("name", birth_day)
+select "author", null from book;
+
 INSERT INTO author("name", birth_day) 
 VALUES 
     ('Amit Garg', '1978-03-18'),
