@@ -53,9 +53,9 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 		http.Error(w, "Error retrieving book", http.StatusInternalServerError)
 	}
 
-	if book == (domain.Book{}) {
-		http.Error(w, "Book not found", http.StatusNotFound)
-	}
+	// if book == (domain.Book{}) {
+	// 	http.Error(w, "Book not found", http.StatusNotFound)
+	// }
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
