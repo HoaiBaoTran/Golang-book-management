@@ -10,7 +10,7 @@ func SetMainRouter() *mux.Router {
 }
 
 func SetBookRouter(bookHandler *handler.BookHandler, mainRouter *mux.Router) {
-	bookRouter := mainRouter.PathPrefix("/api/v2/books").Subrouter()
+	bookRouter := mainRouter.PathPrefix("/api/v3/books").Subrouter()
 
 	bookRouter.HandleFunc("", bookHandler.GetAllBooksHandler).Methods("GET")
 	bookRouter.HandleFunc("/{bookId}", bookHandler.GetBookByIdHandler).Methods("GET")
