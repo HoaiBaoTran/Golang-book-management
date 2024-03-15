@@ -10,13 +10,13 @@ func SetMainRouter() *mux.Router {
 }
 
 func SetBookRouter(bookHandler *handler.BookHandler, mainRouter *mux.Router) {
-	bookRouter := mainRouter.PathPrefix("/books").Subrouter()
+	bookRouter := mainRouter.PathPrefix("/api/v2/books").Subrouter()
 
-	bookRouter.HandleFunc("", bookHandler.GetAllBooksHandler).Methods("GET")
-	bookRouter.HandleFunc("/{bookId}", bookHandler.GetBookByIdHandler).Methods("GET")
-	bookRouter.HandleFunc("", bookHandler.CreateBookHandler).Methods("POST")
-	bookRouter.HandleFunc("/{bookId}", bookHandler.DeleteBookByIdHandler).Methods("DELETE")
-	bookRouter.HandleFunc("", bookHandler.DeleteMultipleBookByIdHandler).Methods("DELETE")
-	bookRouter.HandleFunc("/{bookId}", bookHandler.UpdateBookByIdHandler).Methods("PUT")
-	bookRouter.HandleFunc("", bookHandler.UpdateMultipleBookByIdHandler).Methods("PUT")
+	bookRouter.HandleFunc("", bookHandler.GetAllBooksHandlerVersion2).Methods("GET")
+	bookRouter.HandleFunc("/{bookId}", bookHandler.GetBookByIdHandlerVersion2).Methods("GET")
+	bookRouter.HandleFunc("", bookHandler.CreateBookHandlerVersion2).Methods("POST")
+	bookRouter.HandleFunc("/{bookId}", bookHandler.DeleteBookByIdHandlerVersion2).Methods("DELETE")
+	bookRouter.HandleFunc("", bookHandler.DeleteMultipleBookByIdHandlerVersion2).Methods("DELETE")
+	bookRouter.HandleFunc("/{bookId}", bookHandler.UpdateBookByIdHandlerVersion2).Methods("PUT")
+	bookRouter.HandleFunc("", bookHandler.UpdateMultipleBookByIdHandlerVersion2).Methods("PUT")
 }

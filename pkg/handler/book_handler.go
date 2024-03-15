@@ -22,11 +22,11 @@ func NewBookHandler(bookService *service.BookService) *BookHandler {
 	}
 }
 
-func (h *BookHandler) GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) GetAllBooksHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	fromValue := r.URL.Query().Get("from")
 	toValue := r.URL.Query().Get("to")
 
-	books, err := h.bookService.GetAllBooks(fromValue, toValue)
+	books, err := h.bookService.GetAllBooksVersion2(fromValue, toValue)
 
 	if err != nil {
 		fmt.Println(err)
@@ -38,7 +38,7 @@ func (h *BookHandler) GetAllBooksHandler(w http.ResponseWriter, r *http.Request)
 	json.NewEncoder(w).Encode(books)
 }
 
-func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) GetBookByIdHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])
 	if err != nil {
@@ -46,7 +46,7 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	book, err := h.bookService.GetBookById(bookId)
+	book, err := h.bookService.GetBookByIdVersion2(bookId)
 	if err != nil {
 		http.Error(w, "Error retrieving book", http.StatusInternalServerError)
 	}
@@ -60,7 +60,7 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 	json.NewEncoder(w).Encode(book)
 }
 
-func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) CreateBookHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	var bookDataList []map[string]string
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
@@ -84,7 +84,7 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 			http.Error(w, "Invalid publish year", http.StatusBadRequest)
 		}
 
-		book, err := h.bookService.CreateBook(name, isbn, author, publishYearInt)
+		book, err := h.bookService.CreateBookVersion2(name, isbn, author, publishYearInt)
 		if err != nil {
 			http.Error(w, "Error creating book", http.StatusInternalServerError)
 			return
@@ -97,7 +97,7 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(response)
 }
 
-func (h *BookHandler) DeleteMultipleBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) DeleteMultipleBookByIdHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	var bookDataId map[string][]int
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataId); err != nil {
@@ -106,7 +106,7 @@ func (h *BookHandler) DeleteMultipleBookByIdHandler(w http.ResponseWriter, r *ht
 	}
 	bookIdSlice := bookDataId["data"]
 	for _, bookId := range bookIdSlice {
-		book, err := h.bookService.DeleteBookById(bookId)
+		book, err := h.bookService.DeleteBookByIdVersion2(bookId)
 		if err != nil {
 			http.Error(w, "Error deleting book", http.StatusInternalServerError)
 		}
@@ -118,7 +118,7 @@ func (h *BookHandler) DeleteMultipleBookByIdHandler(w http.ResponseWriter, r *ht
 	json.NewEncoder(w).Encode(response)
 }
 
-func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) DeleteBookByIdHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])
 	if err != nil {
@@ -126,7 +126,7 @@ func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	book, err := h.bookService.DeleteBookById(bookId)
+	book, err := h.bookService.DeleteBookByIdVersion2(bookId)
 	if err != nil {
 		http.Error(w, "Error deleting book", http.StatusInternalServerError)
 	}
@@ -136,7 +136,7 @@ func (h *BookHandler) DeleteBookByIdHandler(w http.ResponseWriter, r *http.Reque
 	json.NewEncoder(w).Encode(book)
 }
 
-func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) UpdateBookByIdHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])
 	if err != nil {
@@ -150,7 +150,7 @@ func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	book, err := h.bookService.UpdateBookById(bookId, bookData)
+	book, err := h.bookService.UpdateBookByIdVersion2(bookId, bookData)
 	if err != nil {
 		log.Fatal("Update fail", err)
 	}
@@ -159,7 +159,7 @@ func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Reque
 	json.NewEncoder(w).Encode(book)
 }
 
-func (h *BookHandler) UpdateMultipleBookByIdHandler(w http.ResponseWriter, r *http.Request) {
+func (h *BookHandler) UpdateMultipleBookByIdHandlerVersion2(w http.ResponseWriter, r *http.Request) {
 	var bookDataList []map[string]string
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
@@ -175,7 +175,7 @@ func (h *BookHandler) UpdateMultipleBookByIdHandler(w http.ResponseWriter, r *ht
 				http.Error(w, "Invalid request body", http.StatusBadRequest)
 				return
 			}
-			book, err := h.bookService.UpdateBookById(bookIdInt, bookData)
+			book, err := h.bookService.UpdateBookByIdVersion2(bookIdInt, bookData)
 			if err != nil {
 				http.Error(w, "Update failed", http.StatusBadRequest)
 				return
