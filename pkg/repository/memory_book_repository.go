@@ -56,7 +56,7 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 	}
 }
 
-func (r *MemoryBookRepository) GetAllBooksVersion2(fromValue, toValue string) ([]domain.Book, error) {
+func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.Book, error) {
 	result := make([]domain.Book, 0, len(r.books))
 
 	sqlStatement := `
@@ -94,7 +94,7 @@ func (r *MemoryBookRepository) GetAllBooksVersion2(fromValue, toValue string) ([
 	return result, nil
 }
 
-func (r *MemoryBookRepository) GetBookByIdVersion2(id int) (domain.Book, error) {
+func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 	if len(r.books) > 0 {
 		book, exist := r.books[id]
 		if !exist {
@@ -127,7 +127,7 @@ func (r *MemoryBookRepository) GetBookByIdVersion2(id int) (domain.Book, error) 
 	return book, nil
 }
 
-func (r *MemoryBookRepository) CreateBookVersion2(book domain.Book) (domain.Book, error) {
+func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error) {
 	author, err := memoryAuthorRepository.GetAuthorByName(book.Author.Name)
 	CheckError(err, "Not Found Author")
 	if author.Id != -1 {
@@ -161,8 +161,8 @@ func (r *MemoryBookRepository) CreateBookVersion2(book domain.Book) (domain.Book
 	return book, nil
 }
 
-func (r *MemoryBookRepository) DeleteBookByIdVersion2(bookId int) (domain.Book, error) {
-	book, err := r.GetBookByIdVersion2(bookId)
+func (r *MemoryBookRepository) DeleteBookById(bookId int) (domain.Book, error) {
+	book, err := r.GetBookById(bookId)
 	CheckError(err, "Book not found")
 
 	sqlStatement := "DELETE FROM book WHERE id = $1"
@@ -177,8 +177,8 @@ func (r *MemoryBookRepository) DeleteBookByIdVersion2(bookId int) (domain.Book, 
 	return book, nil
 }
 
-func (r *MemoryBookRepository) UpdateBookByIdVersion2(bookId int, bookData map[string]string) (domain.Book, error) {
-	existBook, err := r.GetBookByIdVersion2(bookId)
+func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]string) (domain.Book, error) {
+	existBook, err := r.GetBookById(bookId)
 	CheckError(err, "Book not found")
 	fmt.Println("-------------------", bookId, existBook)
 
