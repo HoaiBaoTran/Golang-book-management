@@ -1,0 +1,6 @@
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[INSERT INTO book(isbn, name, author, publish_year) VALUES ($1, $2, $3, $4)]
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[Number of rows affected: 1]
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[{0 Capybara World 123-45-6789-011-1 Percy Jackson 2024}]
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[INSERT INTO book(isbn, name, author, publish_year) VALUES ($1, $2, $3, $4)]
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[Number of rows affected: 1]
+2024-03-15 03:16:50	[INFO]	repository/memory_book_repository.go:32	[{0 Pirate King 978-13-6543-452-9 Luffy Monkey 2002}]
