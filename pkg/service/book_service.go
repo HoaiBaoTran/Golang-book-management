@@ -25,9 +25,9 @@ func (s *BookService) GetBookById(id int) (domain.Book, error) {
 
 func (s *BookService) CreateBook(name, isbn, author string, publishYear int) (domain.Book, error) {
 	book := domain.Book{
-		ISBN:        isbn,
-		Name:        name,
-		Author:      author,
+		ISBN: isbn,
+		Name: name,
+		// Author:      author,
 		PublishYear: publishYear,
 	}
 

@@ -1,0 +1,5 @@
+2024-03-15 13:15:26	[INFO]	repository/memory_book_repository.go:32	[[SQL] SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id]
+2024-03-15 13:15:26	[INFO]	repository/memory_book_repository.go:32	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 13:15:26	[INFO]	repository/memory_book_repository.go:32	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 13:15:26	[INFO]	repository/memory_book_repository.go:32	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 13:15:26	[INFO]	repository/memory_book_repository.go:32	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
