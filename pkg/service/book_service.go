@@ -15,8 +15,8 @@ func NewBookService(bookRepository repository.BookRepository) *BookService {
 	}
 }
 
-func (s *BookService) GetAllBooks(fromValue, toValue string) ([]domain.Book, error) {
-	return s.bookRepository.GetAllBooks(fromValue, toValue)
+func (s *BookService) GetAllBooks(isbn, author, fromValue, toValue string) ([]domain.Book, error) {
+	return s.bookRepository.GetAllBooks(isbn, author, fromValue, toValue)
 }
 
 func (s *BookService) GetBookById(id int) (domain.Book, error) {

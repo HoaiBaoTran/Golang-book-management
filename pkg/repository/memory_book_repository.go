@@ -56,7 +56,7 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 	}
 }
 
-func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.Book, error) {
+func (r *MemoryBookRepository) GetAllBooks(isbn, author, fromValue, toValue string) ([]domain.Book, error) {
 	result := make([]domain.Book, 0, len(r.books))
 
 	sqlStatement := `
@@ -67,17 +67,40 @@ func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.
 	ON b.author_id = a.id
 	`
 
-	var rows *sql.Rows
-	var err error
+	var columnName []string
+	var columnValue []string
+
+	if isbn != "" {
+		columnName = append(columnName, "b.isbn")
+		columnValue = append(columnValue, isbn)
+	}
+
+	if author != "" {
+		columnName = append(columnName, "a.name")
+		columnValue = append(columnValue, author)
+	}
 
 	if fromValue != "" && toValue != "" {
-		sqlStatement += " WHERE publish_year >= $1 AND publish_year <= $2"
-		LogMessage("[SQL]", sqlStatement)
-		rows, err = r.DB.Query(sqlStatement, fromValue, toValue)
-	} else {
-		LogMessage("[SQL]", sqlStatement)
-		rows, err = r.DB.Query(sqlStatement)
+		columnName = append(columnName, "b.publish_year")
+		columnValue = append(columnValue, fmt.Sprintf("%s %s", fromValue, toValue))
 	}
+
+	for i := range columnName {
+		if i == 0 {
+			sqlStatement += " WHERE "
+		}
+		if columnName[i] == "b.publish_year" {
+			sqlStatement += fmt.Sprintf("b.publish_year >= %s AND b.publish_year <= %s", fromValue, toValue)
+		} else {
+			sqlStatement += fmt.Sprintf("%s = '%s'", columnName[i], columnValue[i])
+		}
+		if i < len(columnName)-1 {
+			sqlStatement += " AND "
+		}
+	}
+
+	LogMessage("[SQL]", sqlStatement)
+	rows, err := r.DB.Query(sqlStatement)
 	CheckError(err, "Error while querying the database")
 	defer rows.Close()
 
