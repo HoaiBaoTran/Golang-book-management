@@ -1,3 +1,0 @@
-2024-03-15 13:45:48	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM author WHERE name = $1]
-2024-03-15 13:45:48	[INFO]	repository/memory_book_repository.go:32	[INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)]
-2024-03-15 13:45:48	[ERROR]	repository/memory_book_repository.go:26	Can't insert databasepq: insert or update on table "book" violates foreign key constraint "fk_author"

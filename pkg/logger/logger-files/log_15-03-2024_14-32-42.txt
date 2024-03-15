@@ -1,0 +1,96 @@
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:32:46	[ERROR]	repository/memory_book_repository.go:29	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-15 14:32:46	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {0  }}]
+2024-03-15 14:33:10	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {7 Luffy Monkey }}]
+2024-03-15 14:33:10	[INFO]	repository/memory_book_repository.go:35	[SELECT * FROM author WHERE name = $1]
+2024-03-15 14:33:10	[ERROR]	repository/memory_book_repository.go:29	Error while scanning rowsql: Scan error on column index 2, name "birth_day": converting NULL to string is unsupported
+2024-03-15 14:33:10	[INFO]	repository/memory_book_repository.go:35	[{7 Luffy Monkey }]
+2024-03-15 14:33:10	[INFO]	repository/memory_book_repository.go:35	[UPDATE book SET name = 'Capybara', author_id = 'Luffy' WHERE id = $1]
+2024-03-15 14:33:10	[ERROR]	repository/memory_book_repository.go:29	Can't update database pq: invalid input syntax for type integer: "Luffy"
+2024-03-15 14:33:10	[INFO]	repository/memory_book_repository.go:35	[<nil>]
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:33:19	[ERROR]	repository/memory_book_repository.go:29	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-15 14:33:19	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {0  }}]
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:33:38	[ERROR]	repository/memory_book_repository.go:29	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-15 14:33:38	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {0  }}]
+2024-03-15 14:34:20	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {7 Luffy Monkey }}]
+2024-03-15 14:34:20	[INFO]	repository/memory_book_repository.go:35	[DELETE FROM book WHERE id = $1]
+2024-03-15 14:34:20	[INFO]	repository/memory_book_repository.go:35	[Number of rows affected: 1]
+2024-03-15 14:34:20	[INFO]	repository/memory_book_repository.go:35	[{18 Pirate King 978-13-6543-452-9 2002 {7 Luffy Monkey }}]
+2024-03-15 14:34:24	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:34:24	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:34:24	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:34:24	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:34:24	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:34:28	[INFO]	repository/memory_book_repository.go:35	[SELECT * FROM author WHERE name = $1]
+2024-03-15 14:34:28	[INFO]	repository/memory_book_repository.go:35	[{4 James Clear 1986-01-22T00:00:00Z}]
+2024-03-15 14:34:28	[INFO]	repository/memory_book_repository.go:35	[INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)]
+2024-03-15 14:34:28	[INFO]	repository/memory_book_repository.go:35	[Number of rows affected: 1]
+2024-03-15 14:34:28	[INFO]	repository/memory_book_repository.go:35	[{0 Atomic Habits 978-07-3521-129-2 2018 {0 James Clear }}]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:34:31	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {0  }}]
+2024-03-15 14:34:55	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {4 James Clear 1986-01-22T00:00:00Z}}]
+2024-03-15 14:34:55	[INFO]	repository/memory_book_repository.go:35	[SELECT * FROM author WHERE name = $1]
+2024-03-15 14:34:55	[INFO]	repository/memory_book_repository.go:35	[{4 James Clear 1986-01-22T00:00:00Z}]
+2024-03-15 14:34:55	[INFO]	repository/memory_book_repository.go:35	[UPDATE book SET name = 'Capybara', author_id = 'Luffy' WHERE id = $1]
+2024-03-15 14:34:55	[ERROR]	repository/memory_book_repository.go:29	Can't update database pq: invalid input syntax for type integer: "Luffy"
+2024-03-15 14:34:55	[INFO]	repository/memory_book_repository.go:35	[<nil>]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:35:21	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {0  }}]

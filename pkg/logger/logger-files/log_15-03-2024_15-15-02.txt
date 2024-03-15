@@ -1,0 +1,25 @@
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id 
+	WHERE b.id = $1
+	]
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[{19 Capybara 978-07-3521-129-2 2018 {0  }}]
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[SELECT * FROM author WHERE name = $1]
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[{4 James Clear 1986-01-22T00:00:00Z}]
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[UPDATE book SET name = 'Capybara Wrold', author_id = 4 WHERE id = $1]
+2024-03-15 15:15:06	[INFO]	repository/memory_book_repository.go:33	[{0x140000fc090 1}]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 15:15:32	[INFO]	repository/memory_book_repository.go:33	[{19 Capybara Wrold 978-07-3521-129-2 2018 {0  }}]

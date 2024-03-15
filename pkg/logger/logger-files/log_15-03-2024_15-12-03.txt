@@ -1,0 +1,18 @@
+2024-03-15 15:12:06	[INFO]	repository/memory_book_repository.go:33	[
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id 
+	WHERE b.id = $1
+	]
+2024-03-15 15:12:06	[INFO]	repository/memory_book_repository.go:33	[{19 Capybara 978-07-3521-129-2 2018 {0  }}]
+2024-03-15 15:12:06	[INFO]	repository/memory_book_repository.go:33	[SELECT * FROM author WHERE name = $1]
+2024-03-15 15:12:06	[INFO]	repository/memory_book_repository.go:33	[
+	WITH new_author AS (
+		INSERT INTO author(name) 
+		VALUES ($1) RETURNING id::int
+	) 
+	UPDATE book b SET name = 'Capybara', author_id = (SELECT id FROM new_author) WHERE b.id = $1]
+2024-03-15 15:12:06	[ERROR]	repository/memory_book_repository.go:27	Can't update database pq: operator does not exist: integer = character varying
+2024-03-15 15:12:06	[INFO]	repository/memory_book_repository.go:33	[<nil>]

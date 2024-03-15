@@ -1,2 +1,0 @@
-2024-03-15 13:23:22	[INFO]	repository/memory_book_repository.go:32	[SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b WHERE b.id = $1 JOIN author a ON b.author_id = a.id]
-2024-03-15 13:23:22	[ERROR]	repository/memory_book_repository.go:26	Error while querying the databasepq: syntax error at or near "JOIN"

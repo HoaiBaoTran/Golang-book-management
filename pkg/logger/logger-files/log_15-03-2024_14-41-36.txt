@@ -1,0 +1,46 @@
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:41:42	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {0  }}]
+2024-03-15 14:41:45	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {4 James Clear 1986-01-22T00:00:00Z}}]
+2024-03-15 14:41:45	[INFO]	repository/memory_book_repository.go:35	[SELECT * FROM author WHERE name = $1]
+2024-03-15 14:41:45	[INFO]	repository/memory_book_repository.go:35	[
+	WITH new_author AS (
+		INSERT INTO author(name) 
+		VALUES ($1) RETURNING id
+	) 
+	UPDATE book SET name = 'Capybara', author_id = (SELECT id FROM new_author)WHERE id = $1]
+2024-03-15 14:41:45	[ERROR]	repository/memory_book_repository.go:29	Can't update database pq: operator does not exist: integer = character varying
+2024-03-15 14:41:45	[INFO]	repository/memory_book_repository.go:35	[<nil>]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:41:54	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {0  }}]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 {0  }}]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[{2 Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[{4  Client Server Computing 978-93-8067-432-2 2012 {0  }}]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[{3 Data Structure Using C 978-93-5163-389-1  2015 {0  }}]
+2024-03-15 14:42:03	[INFO]	repository/memory_book_repository.go:35	[{19 Atomic Habits 978-07-3521-129-2 2018 {0  }}]

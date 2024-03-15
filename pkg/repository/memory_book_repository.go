@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 
@@ -13,7 +12,10 @@ import (
 	goDotEnv "github.com/joho/godotenv"
 )
 
-var MyLogger = logger.InitLogger()
+var (
+	MyLogger               = logger.InitLogger()
+	memoryAuthorRepository = NewMemoryAuthorRepository()
+)
 
 type MemoryBookRepository struct {
 	books map[int]domain.Book
@@ -93,7 +95,7 @@ func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.
 }
 
 func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
-	if len(r.books) != 0 {
+	if len(r.books) > 0 {
 		book, exist := r.books[id]
 		if !exist {
 			return domain.Book{}, nil
@@ -115,16 +117,17 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 	CheckError(err, "Error while querying the database")
 
 	var book domain.Book
+	var author domain.Author
 	for rows.Next() {
-		err := rows.Scan(&book.Id, &book.ISBN, &book.Name, &book.Author, &book.PublishYear)
+		err := rows.Scan(&book.Id, &book.ISBN, &book.Name, &book.PublishYear, &author.Id, &author.Name, &author.BirthDay)
 		CheckError(err, "Error while scanning row")
 		LogMessage(book)
+		book.Author = author
 	}
 	return book, nil
 }
 
 func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error) {
-	memoryAuthorRepository := NewMemoryAuthorRepository()
 	author, err := memoryAuthorRepository.GetAuthorByName(book.Author.Name)
 	CheckError(err, "Not Found Author")
 	if author.Id != -1 {
@@ -177,48 +180,92 @@ func (r *MemoryBookRepository) DeleteBookById(bookId int) (domain.Book, error) {
 func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]string) (domain.Book, error) {
 	existBook, err := r.GetBookById(bookId)
 	CheckError(err, "Book not found")
+	fmt.Println("-------------------", bookId, existBook)
 
 	columnsToUpdate := make([]string, 0, len(bookData))
 	newValues := make([]string, 0, len(bookData))
+
+	author, err := memoryAuthorRepository.GetAuthorByName(bookData["author"])
+	CheckError(err, "Not Found Author")
 
 	for key, value := range bookData {
 		if key == "publishYear" {
 			key = "publish_year"
 		}
-		columnsToUpdate = append(columnsToUpdate, key)
-		newValues = append(newValues, value)
+
+		if key == "author" {
+			key = "author_id"
+			value = fmt.Sprintf("%d", author.Id)
+		}
+
 		switch key {
 		case "name":
 			existBook.Name = value
 		case "isbn":
 			existBook.ISBN = value
-		case "author":
-			// existBook.Author = value
-		case "publishYear":
+		case "publish_year":
 			publishYearInt, err := strconv.Atoi(value)
-			if err != nil {
-				log.Fatal("Cant update", err)
-			}
+			CheckError(err, "Can't not parse int")
 			existBook.PublishYear = publishYearInt
-		default:
-			continue
+		case "author_id":
+			existBook.Author = author
 		}
+
+		columnsToUpdate = append(columnsToUpdate, key)
+		newValues = append(newValues, value)
 	}
 
-	sqlStatement := "UPDATE book SET "
+	if author.Id != -1 {
+		sqlStatement := "UPDATE book SET "
+		for i := 0; i < len(columnsToUpdate); i++ {
+			if columnsToUpdate[i] == "author_id" {
+				sqlStatement += fmt.Sprintf("%s = %s", columnsToUpdate[i], newValues[i])
+			} else {
+				sqlStatement += fmt.Sprintf("%s = '%s'", columnsToUpdate[i], newValues[i])
+			}
+
+			if i < len(columnsToUpdate)-1 {
+				sqlStatement += ", "
+			}
+		}
+
+		sqlStatement += " WHERE id = $1"
+		LogMessage(sqlStatement)
+
+		result, err := r.DB.Exec(sqlStatement, bookId)
+		CheckError(err, "Can't update database ")
+		LogMessage(result)
+
+		return existBook, nil
+	}
+
+	sqlStatement := `
+	WITH new_author AS (
+		INSERT INTO author(name) 
+		VALUES ($1) RETURNING id::int
+	) 
+	UPDATE book b SET `
 	for i := 0; i < len(columnsToUpdate); i++ {
-		sqlStatement += fmt.Sprintf("%s = '%s'", columnsToUpdate[i], newValues[i])
+		if columnsToUpdate[i] == "author_id" {
+			sqlStatement += fmt.Sprintf("%s = (SELECT id FROM new_author)", columnsToUpdate[i])
+		} else {
+			sqlStatement += fmt.Sprintf("%s = '%s'", columnsToUpdate[i], newValues[i])
+		}
 		if i < len(columnsToUpdate)-1 {
 			sqlStatement += ", "
 		}
 	}
 
-	sqlStatement += " WHERE id = $1"
+	sqlStatement += " WHERE b.id = $2"
 	LogMessage(sqlStatement)
 
-	result, err := r.DB.Exec(sqlStatement, bookId)
+	result, err := r.DB.Exec(sqlStatement, bookData["author"], bookId)
 	CheckError(err, "Can't update database ")
 	LogMessage(result)
+
+	existBook.Author = domain.Author{
+		Name: bookData["author"],
+	}
 
 	return existBook, nil
 }
