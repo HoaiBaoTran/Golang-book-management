@@ -27,7 +27,9 @@ func (s *BookService) CreateBook(name, isbn, author string, publishYear int) (do
 	book := domain.Book{
 		ISBN: isbn,
 		Name: name,
-		// Author:      author,
+		Author: domain.Author{
+			Name: author,
+		},
 		PublishYear: publishYear,
 	}
 

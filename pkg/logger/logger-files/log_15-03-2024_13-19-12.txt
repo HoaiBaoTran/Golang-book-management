@@ -1,0 +1,12 @@
+2024-03-15 13:19:22	[INFO]	repository/memory_book_repository.go:32	[SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = $1]
+2024-03-15 13:19:22	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: expected 7 destination arguments in Scan, not 5
+2024-03-15 13:19:22	[INFO]	repository/memory_book_repository.go:32	[{0   0 {0  }}]
+2024-03-15 13:19:28	[INFO]	repository/memory_book_repository.go:32	[SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = $1]
+2024-03-15 13:19:28	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: expected 7 destination arguments in Scan, not 5
+2024-03-15 13:19:28	[INFO]	repository/memory_book_repository.go:32	[{0   0 {0  }}]
+2024-03-15 13:19:53	[INFO]	repository/memory_book_repository.go:32	[SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = $1]
+2024-03-15 13:19:53	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: expected 7 destination arguments in Scan, not 5
+2024-03-15 13:19:53	[INFO]	repository/memory_book_repository.go:32	[{0   0 {0  }}]
+2024-03-15 13:22:48	[INFO]	repository/memory_book_repository.go:32	[SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = $1]
+2024-03-15 13:22:48	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: expected 7 destination arguments in Scan, not 5
+2024-03-15 13:22:48	[INFO]	repository/memory_book_repository.go:32	[{0   0 {0  }}]

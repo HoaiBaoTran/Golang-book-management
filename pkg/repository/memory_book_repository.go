@@ -57,7 +57,13 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 func (r *MemoryBookRepository) GetAllBooks(fromValue, toValue string) ([]domain.Book, error) {
 	result := make([]domain.Book, 0, len(r.books))
 
-	sqlStatement := "SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id"
+	sqlStatement := `
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	`
 
 	var rows *sql.Rows
 	var err error
@@ -96,7 +102,14 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 		return book, nil
 	}
 
-	sqlStatement := "SELECT * FROM book WHERE id = $1"
+	sqlStatement := `
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id 
+	WHERE b.id = $1
+	`
 	LogMessage(sqlStatement)
 	rows, err := r.DB.Query(sqlStatement, id)
 	CheckError(err, "Error while querying the database")
@@ -111,9 +124,32 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 }
 
 func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error) {
-	sqlStatement := "INSERT INTO book(isbn, name, author, publish_year) VALUES ($1, $2, $3, $4)"
+	memoryAuthorRepository := NewMemoryAuthorRepository()
+	author, err := memoryAuthorRepository.GetAuthorByName(book.Author.Name)
+	CheckError(err, "Not Found Author")
+	if author.Id != -1 {
+		sqlStatement := "INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)"
+		LogMessage(sqlStatement)
+		result, err := r.DB.Exec(sqlStatement, book.ISBN, book.Name, book.PublishYear, author.Id)
+		CheckError(err, "Can't insert database")
+		numberOfRowsAffected, err := result.RowsAffected()
+		CheckError(err, "Can't get number of rows affected")
+		LogMessage("Number of rows affected:", numberOfRowsAffected)
+		LogMessage(book)
+		return book, nil
+	}
+
+	sqlStatement := `
+	WITH new_author AS (
+		INSERT INTO author(name) 
+		VALUES ($1) RETURNING id
+	) 
+	INSERT INTO book(isbn, name, publish_year, author_id)
+	VALUES
+		($2, $3, $4, (SELECT id FROM new_author))
+	`
 	LogMessage(sqlStatement)
-	result, err := r.DB.Exec(sqlStatement, book.ISBN, book.Name, book.Author, book.PublishYear)
+	result, err := r.DB.Exec(sqlStatement, book.Author.Name, book.ISBN, book.Name, book.PublishYear)
 	CheckError(err, "Can't insert database")
 	numberOfRowsAffected, err := result.RowsAffected()
 	CheckError(err, "Can't get number of rows affected")

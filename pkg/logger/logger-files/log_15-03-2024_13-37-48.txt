@@ -1,0 +1,4 @@
+2024-03-15 13:37:50	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM author WHERE name = '$1']
+2024-03-15 13:37:50	[ERROR]	repository/memory_book_repository.go:26	Error while querying the databasepq: got 1 parameters but the statement requires 0
+2024-03-15 13:39:41	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM author WHERE name = '$1']
+2024-03-15 13:39:41	[ERROR]	repository/memory_book_repository.go:26	Error while querying the databasepq: got 1 parameters but the statement requires 0

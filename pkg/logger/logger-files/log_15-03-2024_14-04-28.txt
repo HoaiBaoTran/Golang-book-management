@@ -1,0 +1,5 @@
+2024-03-15 14:04:32	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM author WHERE name = $1]
+2024-03-15 14:04:32	[INFO]	repository/memory_book_repository.go:32	[{4 James Clear 1986-01-22T00:00:00Z}]
+2024-03-15 14:04:32	[INFO]	repository/memory_book_repository.go:32	[INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)]
+2024-03-15 14:04:32	[INFO]	repository/memory_book_repository.go:32	[Number of rows affected: 1]
+2024-03-15 14:04:32	[INFO]	repository/memory_book_repository.go:32	[{0 Atomic Habits 978-07-3521-129-2 2018 {0 James Clear }}]

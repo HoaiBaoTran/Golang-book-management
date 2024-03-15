@@ -1,5 +1,0 @@
-2024-03-15 03:24:04	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM book WHERE id = $1]
-2024-03-15 03:24:04	[INFO]	repository/memory_book_repository.go:32	[{10 Chilling Capybara 123-45-6789-011-1 Percy Poseidon 2024}]
-2024-03-15 03:24:04	[INFO]	repository/memory_book_repository.go:32	[DELETE FROM book WHERE id = $1]
-2024-03-15 03:24:04	[INFO]	repository/memory_book_repository.go:32	[Number of rows affected: 1]
-2024-03-15 03:24:04	[INFO]	repository/memory_book_repository.go:32	[0x14000114440]

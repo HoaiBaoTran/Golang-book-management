@@ -59,3 +59,29 @@ func (authorRepository *MemoryAuthorRepository) GetAuthorById(id int) (domain.Au
 	}
 	return author, nil
 }
+
+func (authorRepository *MemoryAuthorRepository) GetAuthorByName(name string) (domain.Author, error) {
+	if len(authorRepository.authors) != 0 {
+		for _, author := range authorRepository.authors {
+			if author.Name == name {
+				LogMessage(author)
+				return author, nil
+			}
+		}
+	}
+	sqlStatement := "SELECT * FROM author WHERE name = $1"
+	LogMessage(sqlStatement)
+	rows, err := authorRepository.DB.Query(sqlStatement, name)
+	CheckError(err, "Error while querying the database")
+
+	var author domain.Author
+	if rows.Next() {
+		err := rows.Scan(&author.Id, &author.Name, &author.BirthDay)
+		CheckError(err, "Error while scanning row")
+		LogMessage(author)
+		return author, nil
+	}
+	return domain.Author{
+		Id: -1,
+	}, nil
+}

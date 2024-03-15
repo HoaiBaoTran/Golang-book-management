@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS author;
 CREATE TABLE "author" (
     id SERIAL PRIMARY KEY,
     "name" VARCHAR(200) NOT NULL,
-    birth_day DATE NOT NULL
+    birth_day DATE
 );
 
 INSERT INTO author("name", birth_day) 
