@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hoaibao/book-management/handler"
-	"github.com/hoaibao/book-management/repository"
-	"github.com/hoaibao/book-management/router"
-	"github.com/hoaibao/book-management/service"
+	"github.com/hoaibao/book-management/pkg/handler"
+	"github.com/hoaibao/book-management/pkg/repository"
+	"github.com/hoaibao/book-management/pkg/router"
+	"github.com/hoaibao/book-management/pkg/service"
 )
 
 func main() {
