@@ -180,7 +180,7 @@ func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]st
 			existBook.ISBN = value
 		case "author":
 			existBook.Author = value
-		case "publishYear":
+		case "publish_year":
 			publishYearInt, err := strconv.Atoi(value)
 			if err != nil {
 				log.Fatal("Cant update", err)
