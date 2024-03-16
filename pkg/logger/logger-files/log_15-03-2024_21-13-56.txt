@@ -1,0 +1,32 @@
+2024-03-15 21:14:06	[INFO]	repository/memory_book_repository.go:32	[SELECT * FROM book WHERE id = $1]
+2024-03-15 21:14:06	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Amit Garg") to a int: invalid syntax
+2024-03-15 21:14:06	[INFO]	repository/memory_book_repository.go:32	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 2011 0}]
+2024-03-15 21:14:06	[INFO]	repository/memory_book_repository.go:32	[UPDATE book SET name = 'Hello', author = 'Luffy' WHERE id = $1]
+2024-03-15 21:14:06	[INFO]	repository/memory_book_repository.go:32	[{0x140001c0000 1}]
+2024-03-15 21:14:09	[INFO]	repository/memory_book_repository.go:32	[[SQL] SELECT * FROM book]
+2024-03-15 21:14:09	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Lalit Kumar") to a int: invalid syntax
+2024-03-15 21:14:09	[INFO]	repository/memory_book_repository.go:32	[{2 Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:14:09	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:14:09	[INFO]	repository/memory_book_repository.go:32	[{3 Data Structure Using C 978-93-5163-389-1  2015 0}]
+2024-03-15 21:14:09	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:14:09	[INFO]	repository/memory_book_repository.go:32	[{4  Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:14:09	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Luffy") to a int: invalid syntax
+2024-03-15 21:14:09	[INFO]	repository/memory_book_repository.go:32	[{1 Hello 978-93-5019-561-1 2011 0}]
+2024-03-15 21:15:54	[INFO]	repository/memory_book_repository.go:32	[[SQL] SELECT * FROM book]
+2024-03-15 21:15:54	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Lalit Kumar") to a int: invalid syntax
+2024-03-15 21:15:54	[INFO]	repository/memory_book_repository.go:32	[{2 Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:15:54	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:15:54	[INFO]	repository/memory_book_repository.go:32	[{3 Data Structure Using C 978-93-5163-389-1  2015 0}]
+2024-03-15 21:15:54	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:15:54	[INFO]	repository/memory_book_repository.go:32	[{4  Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:15:54	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Luffy") to a int: invalid syntax
+2024-03-15 21:15:54	[INFO]	repository/memory_book_repository.go:32	[{1 Hello 978-93-5019-561-1 2011 0}]
+2024-03-15 21:15:58	[INFO]	repository/memory_book_repository.go:32	[[SQL] SELECT * FROM book]
+2024-03-15 21:15:58	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Lalit Kumar") to a int: invalid syntax
+2024-03-15 21:15:58	[INFO]	repository/memory_book_repository.go:32	[{2 Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:15:58	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:15:58	[INFO]	repository/memory_book_repository.go:32	[{3 Data Structure Using C 978-93-5163-389-1  2015 0}]
+2024-03-15 21:15:58	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Sharad Kumar Verma") to a int: invalid syntax
+2024-03-15 21:15:58	[INFO]	repository/memory_book_repository.go:32	[{4  Client Server Computing 978-93-8067-432-2 2012 0}]
+2024-03-15 21:15:58	[ERROR]	repository/memory_book_repository.go:26	Error while scanning rowsql: Scan error on column index 4, name "author": converting driver.Value type string ("Luffy") to a int: invalid syntax
+2024-03-15 21:15:58	[INFO]	repository/memory_book_repository.go:32	[{1 Hello 978-93-5019-561-1 2011 0}]

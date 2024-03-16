@@ -25,8 +25,10 @@ func NewBookHandler(bookService *service.BookService) *BookHandler {
 func (h *BookHandler) GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
 	fromValue := r.URL.Query().Get("from")
 	toValue := r.URL.Query().Get("to")
+	isbnValue := r.URL.Query().Get("isbn")
+	authorValue := r.URL.Query().Get("author")
 
-	books, err := h.bookService.GetAllBooks(fromValue, toValue)
+	books, err := h.bookService.GetAllBooks(isbnValue, authorValue, fromValue, toValue)
 
 	if err != nil {
 		fmt.Println(err)
