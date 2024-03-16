@@ -20,6 +20,15 @@ migrate-up-v2:
 migrate-down-v2:
 	migrate -path=$(MIGRATION_PATH) -database=$(DATABASE_URL) -verbose down 2
 
+migrate-v3-force:
+	migrate -path=$(MIGRATION_PATH) -database=$(DATABASE_URL) force 3
+
+migrate-up-v3:
+	migrate -path=$(MIGRATION_PATH) -database=$(DATABASE_URL) -verbose up 3
+
+migrate-down-v3:
+	migrate -path=$(MIGRATION_PATH) -database=$(DATABASE_URL) -verbose down 3
+
 migrate-create:
 	migrate create -ext=sql -dir=$(MIGRATION_PATH) $(name)
 

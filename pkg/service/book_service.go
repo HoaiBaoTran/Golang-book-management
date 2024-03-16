@@ -24,11 +24,15 @@ func (s *BookService) GetBookById(id int) (domain.Book, error) {
 }
 
 func (s *BookService) CreateBook(name, isbn, author string, publishYear int) (domain.Book, error) {
+	authorObj := domain.Author{
+		Name: author,
+	}
+
 	book := domain.Book{
 		ISBN: isbn,
 		Name: name,
-		Author: domain.Author{
-			Name: author,
+		Authors: []domain.Author{
+			authorObj,
 		},
 		PublishYear: publishYear,
 	}

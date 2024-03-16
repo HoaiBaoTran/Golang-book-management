@@ -110,7 +110,7 @@ func (r *MemoryBookRepository) GetAllBooks(isbn, author, fromValue, toValue stri
 		err := rows.Scan(&book.Id, &book.ISBN, &book.Name, &book.PublishYear, &author.Id, &author.Name, &author.BirthDay)
 		CheckError(err, "Error while scanning row")
 		LogMessage(book)
-		book.Author = author
+		book.Authors = []domain.Author{author}
 		r.books[book.Id] = book
 		result = append(result, book)
 	}
@@ -145,13 +145,13 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 		err := rows.Scan(&book.Id, &book.ISBN, &book.Name, &book.PublishYear, &author.Id, &author.Name, &author.BirthDay)
 		CheckError(err, "Error while scanning row")
 		LogMessage(book)
-		book.Author = author
+		book.Authors = []domain.Author{author}
 	}
 	return book, nil
 }
 
 func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error) {
-	author, err := memoryAuthorRepository.GetAuthorByName(book.Author.Name)
+	author, err := memoryAuthorRepository.GetAuthorByName(book.Authors[0].Name)
 	CheckError(err, "Not Found Author")
 	if author.Id != -1 {
 		sqlStatement := "INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)"
@@ -175,7 +175,7 @@ func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error)
 		($2, $3, $4, (SELECT id FROM new_author))
 	`
 	LogMessage(sqlStatement)
-	result, err := r.DB.Exec(sqlStatement, book.Author.Name, book.ISBN, book.Name, book.PublishYear)
+	result, err := r.DB.Exec(sqlStatement, book.Authors[0].Name, book.ISBN, book.Name, book.PublishYear)
 	CheckError(err, "Can't insert database")
 	numberOfRowsAffected, err := result.RowsAffected()
 	CheckError(err, "Can't get number of rows affected")
@@ -231,7 +231,7 @@ func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]st
 			CheckError(err, "Can't not parse int")
 			existBook.PublishYear = publishYearInt
 		case "author_id":
-			existBook.Author = author
+			existBook.Authors = []domain.Author{author}
 		}
 
 		columnsToUpdate = append(columnsToUpdate, key)
@@ -286,8 +286,10 @@ func (r *MemoryBookRepository) UpdateBookById(bookId int, bookData map[string]st
 	CheckError(err, "Can't update database ")
 	LogMessage(result)
 
-	existBook.Author = domain.Author{
-		Name: bookData["author"],
+	existBook.Authors = []domain.Author{
+		domain.Author{
+			Name: bookData["author"],
+		},
 	}
 
 	return existBook, nil
