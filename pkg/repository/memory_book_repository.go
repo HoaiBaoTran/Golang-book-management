@@ -110,9 +110,19 @@ func (r *MemoryBookRepository) GetAllBooks(isbn, author, fromValue, toValue stri
 		err := rows.Scan(&book.Id, &book.ISBN, &book.Name, &book.PublishYear, &author.Id, &author.Name, &author.BirthDay)
 		CheckError(err, "Error while scanning row")
 		LogMessage(book)
-		book.Authors = []domain.Author{author}
-		r.books[book.Id] = book
-		result = append(result, book)
+		if existBook, isExistBook := r.books[book.Id]; isExistBook {
+			existBook.Authors = append(existBook.Authors, author)
+			r.books[book.Id] = existBook
+			for index, value := range result {
+				if value.Id == existBook.Id {
+					result[index] = existBook
+				}
+			}
+		} else {
+			book.Authors = []domain.Author{author}
+			r.books[book.Id] = book
+			result = append(result, book)
+		}
 	}
 	return result, nil
 }
@@ -256,13 +266,41 @@ func (r *MemoryBookRepository) DeleteBookById(bookId int) (domain.Book, error) {
 	book, err := r.GetBookById(bookId)
 	CheckError(err, "Book not found")
 
-	sqlStatement := "DELETE FROM book WHERE id = $1"
+	sqlStatement := `
+	BEGIN TRANSACTION;
+	DELETE FROM book_author where book_id = $1;
+	DELETE FROM book WHERE id = $2;
+	COMMIT;
+	`
 	LogMessage(sqlStatement)
-	result, err := r.DB.Exec(sqlStatement, bookId)
-	CheckError(err, "Can't delete from database")
-	numberOfRowsAffected, err := result.RowsAffected()
-	CheckError(err, "Can't get number of rows affected")
-	LogMessage("Number of rows affected:", numberOfRowsAffected)
+
+	tx, err := r.DB.Begin()
+	CheckError(err, "Error transaction")
+
+	totalRows := 0
+
+	result, err := tx.Exec("DELETE FROM book_author where book_id = $1", bookId)
+	if err != nil {
+		tx.Rollback()
+	}
+	CheckError(err, "Error deleting book_author")
+	rows, err := result.RowsAffected()
+	totalRows += int(rows)
+	CheckError(err, "Error getting row affected")
+
+	result, err = tx.Exec("DELETE FROM book WHERE id = $1", bookId)
+	if err != nil {
+		tx.Rollback()
+	}
+	CheckError(err, "Error deleting book")
+	rows, err = result.RowsAffected()
+	totalRows += int(rows)
+	CheckError(err, "Error getting row affected")
+
+	err = tx.Commit()
+	CheckError(err, "Error committing transaction")
+
+	LogMessage("Number of rows affected:", totalRows)
 	LogMessage(book)
 	delete(r.books, bookId)
 	return book, nil
