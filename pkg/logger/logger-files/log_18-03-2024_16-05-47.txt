@@ -1,0 +1,287 @@
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:49	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:49	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:53	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:53	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:54	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:54	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:55	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:55	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:56	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:56	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:05:57	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:05:57	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.*, a.* 
+	FROM book b 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
+	]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{4  Client Server Computing 978-93-8067-432-2 2012 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{3 Hello 978-93-5163-389-1 2015 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{12 Capybara World 2 Authors 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{8 Atomic Habits 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{9 Capybara World 123-45-6789-011-1 2024 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{10 Pirate King 978-13-6543-452-9 2002 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{2 King of pirates 978-93-8067-432-2 2020 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{1 One Piece 2 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{13 Capybara World CHILLING 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
+2024-03-18 16:06:03	[ERROR]	repository/memory_book_repository.go:28	Error while scanning rowsql: Scan error on column index 6, name "birth_day": converting NULL to string is unsupported
+2024-03-18 16:06:03	[INFO]	repository/memory_book_repository.go:34	[{14 Capybara Animal 978-07-3521-129-2 2018 []}]
