@@ -63,7 +63,7 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) {
-	var bookDataList []map[string]string
+	var bookDataList []map[string][]string
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -81,12 +81,12 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 			return
 		}
 
-		publishYearInt, err := strconv.Atoi(publishYear)
+		publishYearInt, err := strconv.Atoi(publishYear[0])
 		if err != nil {
 			http.Error(w, "Invalid publish year", http.StatusBadRequest)
 		}
 
-		book, err := h.bookService.CreateBook(name, isbn, author, publishYearInt)
+		book, err := h.bookService.CreateBook(name[0], isbn[0], author, publishYearInt)
 		if err != nil {
 			http.Error(w, "Error creating book", http.StatusInternalServerError)
 			return

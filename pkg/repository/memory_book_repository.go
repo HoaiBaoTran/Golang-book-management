@@ -61,10 +61,10 @@ func (r *MemoryBookRepository) GetAllBooks(isbn, author, fromValue, toValue stri
 
 	sqlStatement := `
 	SELECT 
-		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+		b.*, a.* 
 	FROM book b 
-	JOIN author a 
-	ON b.author_id = a.id
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
 	`
 
 	var columnName []string
@@ -129,10 +129,10 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 
 	sqlStatement := `
 	SELECT 
-		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+		b.*, a.* 
 	FROM book b 
-	JOIN author a 
-	ON b.author_id = a.id 
+	JOIN book_author ba ON b.id = ba.book_id
+	JOIN author a ON ba.author_id = a.id
 	WHERE b.id = $1
 	`
 	LogMessage(sqlStatement)
@@ -150,13 +150,39 @@ func (r *MemoryBookRepository) GetBookById(id int) (domain.Book, error) {
 	return book, nil
 }
 
-func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error) {
-	author, err := memoryAuthorRepository.GetAuthorByName(book.Authors[0].Name)
-	CheckError(err, "Not Found Author")
-	if author.Id != -1 {
-		sqlStatement := "INSERT INTO book(isbn, name, publish_year, author_id) VALUES ($1, $2, $3, $4)"
+func (r *MemoryBookRepository) CreateBook(book domain.Book, authors []string) (domain.Book, error) {
+	var authorSlice []domain.Author
+	var unKnowAuthor []string
+	for _, value := range authors {
+		author, err := memoryAuthorRepository.GetAuthorByName(value)
+		CheckError(err, "Not found author")
+		if author.Id != -1 {
+			authorSlice = append(authorSlice, author)
+		} else {
+			unKnowAuthor = append(unKnowAuthor, value)
+		}
+	}
+	if len(unKnowAuthor) == 0 {
+		insertBookAuthorStatement := "INSERT INTO book_author(book_id, author_id) VALUES "
+		bookId := "(SELECT id FROM new_book)"
+		for index, value := range authorSlice {
+			insertBookAuthorStatement += fmt.Sprintf("(%s, %d)", bookId, value.Id)
+			if index < len(authorSlice)-1 {
+				insertBookAuthorStatement += ", "
+			}
+		}
+		sqlStatement := fmt.Sprintf(`
+		WITH new_book AS (
+			INSERT INTO book(isbn, name, publish_year) 
+			VALUES ($1, $2, $3)
+			RETURNING id
+		)
+
+		%s;
+		`, insertBookAuthorStatement)
+		fmt.Println("SQL: ", sqlStatement)
 		LogMessage(sqlStatement)
-		result, err := r.DB.Exec(sqlStatement, book.ISBN, book.Name, book.PublishYear, author.Id)
+		result, err := r.DB.Exec(sqlStatement, book.ISBN, book.Name, book.PublishYear)
 		CheckError(err, "Can't insert database")
 		numberOfRowsAffected, err := result.RowsAffected()
 		CheckError(err, "Can't get number of rows affected")
@@ -165,17 +191,59 @@ func (r *MemoryBookRepository) CreateBook(book domain.Book) (domain.Book, error)
 		return book, nil
 	}
 
-	sqlStatement := `
-	WITH new_author AS (
-		INSERT INTO author(name) 
-		VALUES ($1) RETURNING id
-	) 
-	INSERT INTO book(isbn, name, publish_year, author_id)
-	VALUES
-		($2, $3, $4, (SELECT id FROM new_author))
-	`
+	insertAuthorStatement := "INSERT INTO author(name) VALUES "
+	for index, authorName := range unKnowAuthor {
+		insertAuthorStatement += fmt.Sprintf("('%s')", authorName)
+		if index < len(unKnowAuthor)-1 {
+			insertAuthorStatement += ", "
+		}
+	}
+	insertAuthorStatement += "RETURNING id;"
+	LogMessage(insertAuthorStatement)
+	rows, err := r.DB.Query(insertAuthorStatement)
+	CheckError(err, "Can't get id")
+	var authorIds []int
+	for rows.Next() {
+		var id int
+		err := rows.Scan(&id)
+		CheckError(err, "Error while scanning row")
+		LogMessage(book)
+		authorIds = append(authorIds, id)
+	}
+	fmt.Println(authorIds)
+
+	insertBookAuthorStatement := "INSERT INTO book_author(book_id, author_id) VALUES "
+	bookId := "(SELECT id FROM new_book)"
+
+	for index, value := range authorSlice {
+		insertBookAuthorStatement += fmt.Sprintf("(%s, %d)", bookId, value.Id)
+		if index < len(authorSlice)-1 {
+			insertBookAuthorStatement += ", "
+		}
+	}
+
+	for index, value := range authorIds {
+		if len(authorSlice) > 0 {
+			insertBookAuthorStatement += ", "
+		}
+		insertBookAuthorStatement += fmt.Sprintf("(%s, %d)", bookId, value)
+		if index < len(authorIds)-1 {
+			insertBookAuthorStatement += ", "
+		}
+	}
+
+	sqlStatement := fmt.Sprintf(`
+		WITH new_book AS (
+			INSERT INTO book(isbn, name, publish_year) 
+			VALUES ($1, $2, $3)
+			RETURNING id
+		)
+
+		%s;
+		`, insertBookAuthorStatement)
+
 	LogMessage(sqlStatement)
-	result, err := r.DB.Exec(sqlStatement, book.Authors[0].Name, book.ISBN, book.Name, book.PublishYear)
+	result, err := r.DB.Exec(sqlStatement, book.ISBN, book.Name, book.PublishYear)
 	CheckError(err, "Can't insert database")
 	numberOfRowsAffected, err := result.RowsAffected()
 	CheckError(err, "Can't get number of rows affected")

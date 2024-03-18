@@ -23,21 +23,21 @@ func (s *BookService) GetBookById(id int) (domain.Book, error) {
 	return s.bookRepository.GetBookById(id)
 }
 
-func (s *BookService) CreateBook(name, isbn, author string, publishYear int) (domain.Book, error) {
-	authorObj := domain.Author{
-		Name: author,
+func (s *BookService) CreateBook(name, isbn string, author []string, publishYear int) (domain.Book, error) {
+	authorObj := []domain.Author{}
+
+	for _, authorName := range author {
+		authorObj = append(authorObj, domain.Author{Name: authorName})
 	}
 
 	book := domain.Book{
-		ISBN: isbn,
-		Name: name,
-		Authors: []domain.Author{
-			authorObj,
-		},
+		ISBN:        isbn,
+		Name:        name,
+		Authors:     authorObj,
 		PublishYear: publishYear,
 	}
 
-	return s.bookRepository.CreateBook(book)
+	return s.bookRepository.CreateBook(book, author)
 }
 
 func (s *BookService) DeleteBookById(bookId int) (domain.Book, error) {

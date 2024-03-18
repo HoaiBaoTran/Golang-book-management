@@ -7,7 +7,7 @@ CREATE TABLE "author" (
 );
 
 INSERT INTO author("name", birth_day)
-SELECT "author", null from book;
+SELECT "author", NULL FROM book;
 
 ALTER TABLE book
     ADD COLUMN author_id INT,
