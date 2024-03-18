@@ -44,6 +44,6 @@ func (s *BookService) DeleteBookById(bookId int) (domain.Book, error) {
 	return s.bookRepository.DeleteBookById(bookId)
 }
 
-func (s *BookService) UpdateBookById(bookId int, bookData map[string]string) (domain.Book, error) {
+func (s *BookService) UpdateBookById(bookId int, bookData map[string][]string) (domain.Book, error) {
 	return s.bookRepository.UpdateBookById(bookId, bookData)
 }

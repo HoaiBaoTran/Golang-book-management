@@ -145,7 +145,7 @@ func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Reque
 		http.Error(w, "Invalid book id", http.StatusBadRequest)
 	}
 
-	var bookData map[string]string
+	var bookData map[string][]string
 	err = json.NewDecoder(r.Body).Decode(&bookData)
 	if err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -162,7 +162,7 @@ func (h *BookHandler) UpdateBookByIdHandler(w http.ResponseWriter, r *http.Reque
 }
 
 func (h *BookHandler) UpdateMultipleBookByIdHandler(w http.ResponseWriter, r *http.Request) {
-	var bookDataList []map[string]string
+	var bookDataList []map[string][]string
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -171,7 +171,7 @@ func (h *BookHandler) UpdateMultipleBookByIdHandler(w http.ResponseWriter, r *ht
 
 	for _, bookData := range bookDataList {
 		if bookId, isContainsBookId := bookData["id"]; isContainsBookId {
-			bookIdInt, err := strconv.Atoi(bookId)
+			bookIdInt, err := strconv.Atoi(bookId[0])
 			delete(bookData, "id")
 			if err != nil {
 				http.Error(w, "Invalid request body", http.StatusBadRequest)
