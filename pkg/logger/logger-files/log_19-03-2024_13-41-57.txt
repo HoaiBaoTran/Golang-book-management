@@ -1,0 +1,5 @@
+2024-03-19 13:42:22	[INFO]	repository/memory_book_repository.go:32	[[SQL] SELECT * FROM book]
+2024-03-19 13:42:22	[INFO]	repository/memory_book_repository.go:32	[{1 Junior Level Books Introduction to Computer 978-93-5019-561-1 Amit Garg 2011}]
+2024-03-19 13:42:22	[INFO]	repository/memory_book_repository.go:32	[{2 Client Server Computing 978-93-8067-432-2 Lalit Kumar 2012}]
+2024-03-19 13:42:22	[INFO]	repository/memory_book_repository.go:32	[{3 Data Structure Using C 978-93-5163-389-1  Sharad Kumar Verma 2015}]
+2024-03-19 13:42:22	[INFO]	repository/memory_book_repository.go:32	[{4  Client Server Computing 978-93-8067-432-2 Sharad Kumar Verma 2012}]

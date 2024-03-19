@@ -63,7 +63,8 @@ func getLogWriter() zapcore.WriteSyncer {
 	outputFileName := fmt.Sprintf("pkg/logger/logger-files/log_%s_%s.txt", current_date, current_time)
 	file, err := os.Create(outputFileName)
 	if err != nil {
-		log.Fatal("Can't open log file", err)
+		// log.Fatal("Can't open log file", err)
+		fmt.Println("Can't open log file", err)
 	}
 	return zapcore.AddSync(file)
 }
