@@ -31,7 +31,6 @@ func (h *BookHandler) GetAllBooksHandler(w http.ResponseWriter, r *http.Request)
 	books, err := h.bookService.GetAllBooks(isbnValue, authorValue, fromValue, toValue)
 
 	if err != nil {
-		fmt.Println(err)
 		http.Error(w, "Error retrieving books", http.StatusInternalServerError)
 		return
 	}
@@ -44,6 +43,7 @@ func (h *BookHandler) GetBookByIdHandler(w http.ResponseWriter, r *http.Request)
 	vars := mux.Vars(r)
 	bookId, err := strconv.Atoi(vars["bookId"])
 	if err != nil {
+		fmt.Println("ERROR parsing: ", err)
 		http.Error(w, "Invalid book id", http.StatusBadRequest)
 		return
 	}
@@ -66,7 +66,8 @@ func (h *BookHandler) CreateBookHandler(w http.ResponseWriter, r *http.Request) 
 	var bookDataList []map[string]string
 	var response []domain.Book
 	if err := json.NewDecoder(r.Body).Decode(&bookDataList); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		errMessage := fmt.Sprintf("Invalid request body %s", err)
+		http.Error(w, errMessage, http.StatusBadRequest)
 		return
 	}
 
