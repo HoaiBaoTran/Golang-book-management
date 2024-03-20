@@ -145,7 +145,7 @@ func TestBookHandler_GetBookByIdHandler(t *testing.T) {
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	req, err := http.NewRequest("GET", "/api/v2/books/2", nil)
+	req, err := http.NewRequest("GET", "/api/v3/books/2", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +157,7 @@ func TestBookHandler_GetBookByIdHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.GetBookByIdHandler)
+	r.HandleFunc("/api/v3/books/{bookId}", bookHandler.GetBookByIdHandler)
 
 	// Serve the HTTP request to the mock handler
 	r.ServeHTTP(rr, req)
@@ -210,7 +210,7 @@ func TestBookHandler_CreateBookHandler(t *testing.T) {
 		WithArgs("1234567890", "Book 1", 2010).
 		WillReturnResult(sqlMock.NewResult(1, 1))
 
-	req, err := http.NewRequest("POST", "/api/v2/books", strings.NewReader(book))
+	req, err := http.NewRequest("POST", "/api/v3/books", strings.NewReader(book))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +261,7 @@ func TestBookHandler_DeleteBookByIdHandler(t *testing.T) {
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	req, err := http.NewRequest("DELETE", "/api/v2/books/2", nil)
+	req, err := http.NewRequest("DELETE", "/api/v3/books/2", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +277,7 @@ func TestBookHandler_DeleteBookByIdHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.GetBookByIdHandler)
+	r.HandleFunc("/api/v3/books/{bookId}", bookHandler.GetBookByIdHandler)
 
 	r.ServeHTTP(rr, req)
 
@@ -324,7 +324,7 @@ func TestBookHandler_UpdateBookByIdHandler(t *testing.T) {
 	book := `{"name":["Luffy"],"author":["Capybara"]}`
 
 	fmt.Println("payload: ", strings.NewReader(book))
-	req, err := http.NewRequest("PUT", "/api/v2/books/2", strings.NewReader(book))
+	req, err := http.NewRequest("PUT", "/api/v3/books/2", strings.NewReader(book))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +354,7 @@ func TestBookHandler_UpdateBookByIdHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.UpdateBookByIdHandler)
+	r.HandleFunc("/api/v3/books/{bookId}", bookHandler.UpdateBookByIdHandler)
 
 	r.ServeHTTP(rr, req)
 
