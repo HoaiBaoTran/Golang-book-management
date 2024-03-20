@@ -1,0 +1,16 @@
+2024-03-20 10:10:11	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-20 10:10:11	[ERROR]	repository/memory_book_repository.go:28	Error while querying the databasepq: relation "author" does not exist
+2024-03-20 10:10:14	[INFO]	repository/memory_book_repository.go:34	[[SQL] 
+	SELECT 
+		b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day 
+	FROM book b 
+	JOIN author a 
+	ON b.author_id = a.id
+	]
+2024-03-20 10:10:14	[ERROR]	repository/memory_book_repository.go:28	Error while querying the databasepq: relation "author" does not exist

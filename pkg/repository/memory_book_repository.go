@@ -33,6 +33,12 @@ func LogMessage(args ...interface{}) {
 	MyLogger.ConsoleLogger.Infoln(args)
 	MyLogger.FileLogger.Infoln(args)
 }
+func NewTestMemoryBookRepository(db *sql.DB) *MemoryBookRepository {
+	return &MemoryBookRepository{
+		books: make(map[int]domain.Book, 0),
+		DB:    db,
+	}
+}
 
 func NewMemoryBookRepository() *MemoryBookRepository {
 	err := goDotEnv.Load(".env")
