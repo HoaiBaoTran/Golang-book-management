@@ -14,7 +14,7 @@ import (
 
 var (
 	MyLogger               = logger.InitLogger()
-	memoryAuthorRepository = NewMemoryAuthorRepository()
+	memoryAuthorRepository *MemoryAuthorRepository
 )
 
 type MemoryBookRepository struct {
@@ -34,6 +34,8 @@ func LogMessage(args ...interface{}) {
 	MyLogger.FileLogger.Infoln(args)
 }
 func NewTestMemoryBookRepository(db *sql.DB) *MemoryBookRepository {
+	memoryAuthorRepository = NewTestMemoryAuthorRepository(db)
+
 	return &MemoryBookRepository{
 		books: make(map[int]domain.Book, 0),
 		DB:    db,
@@ -55,6 +57,8 @@ func NewMemoryBookRepository() *MemoryBookRepository {
 
 	db, err := database.NewConnection(config)
 	CheckError(err, "Can't connect database")
+
+	memoryAuthorRepository = NewMemoryAuthorRepository()
 
 	return &MemoryBookRepository{
 		books: make(map[int]domain.Book, 0),

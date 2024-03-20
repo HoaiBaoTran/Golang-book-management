@@ -25,18 +25,18 @@ func TestBookHandler_GetAllBookHandler(t *testing.T) {
 	}
 	defer db.Close()
 
-	rows := sqlMock.NewRows([]string{"id", "name", "isbn", "author", "publish_year"}).
-		AddRow(1, "1234567890", "Book 1", "Author 1", "2011").
-		AddRow(2, "0987654321", "Book 2", "Author 2", "2012")
+	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "publish_year", "author_id", "author_name", "author_birthday"}).
+		AddRow(1, "1234567890", "Book 1", "2011", 1, "Capybara", "01/01/2002").
+		AddRow(2, "0987654321", "Book 2", "2012", 2, "Luffy", "02/02/2002")
 
-	mock.ExpectQuery("^SELECT \\* FROM book$").
+	mock.ExpectQuery("^SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id$").
 		WillReturnRows(rows)
 
 	testBookRepository := repository.NewTestMemoryBookRepository(db)
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	req, err := http.NewRequest("GET", "/api/v1/books", nil)
+	req, err := http.NewRequest("GET", "/api/v2/books", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,21 +56,21 @@ func TestBookHandler_GetAllBookHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `[{"id":1,"name":"Book 1","isbn":"1234567890","author":"Author 1","publishYear":2011},{"id":2,"name":"Book 2","isbn":"0987654321","author":"Author 2","publishYear":2012}]`
+	expected := `[{"id":1,"isbn":"1234567890","name":"Book 1","author":{"id":1,"name":"Capybara","birthDay":"01/01/2002"},"publishYear":2011},{"id":2,"isbn":"0987654321","name":"Book 2","author":{"id":2,"name":"Luffy","birthDay":"02/02/2002"},"publishYear":2012}]`
 	actual := rr.Body.String()
 
 	var expectedBooks []domain.Book
 	var actualBooks []domain.Book
 	if err := json.Unmarshal([]byte(expected), &expectedBooks); err != nil {
-		t.Errorf("error unmarshalling expected JSON: %v", err)
+		t.Errorf("error unMarshalling expected JSON: %v", err)
 	}
 
 	if err := json.Unmarshal([]byte(actual), &actualBooks); err != nil {
-		t.Errorf("error unmarshalling actual JSON: %v", err)
+		t.Errorf("error unMarshalling actual JSON: %v", err)
 	}
 
 	if !reflect.DeepEqual(expectedBooks, actualBooks) {
-		t.Errorf("expected books and actual books are not equal")
+		t.Errorf("expected books and actual books are not equal got %v want %v", actualBooks, expectedBooks)
 	}
 }
 
@@ -86,14 +86,14 @@ func TestBookHandler_GetBookHandlerWithFilter(t *testing.T) {
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "author", "publish_year"}).
-		AddRow(1, "1234567890", "Book 1", "Author 1", "2011").
-		AddRow(2, "0987654321", "Book 2", "Author 2", "2012")
+	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "publish_year", "author_id", "author_name", "author_birthday"}).
+		AddRow(1, "1234567890", "Book 1", "2011", 1, "Capybara", "01/01/2002").
+		AddRow(2, "0987654321", "Book 2", "2012", 2, "Luffy", "02/02/2002")
 
-	mock.ExpectQuery("^SELECT \\* FROM book WHERE publish_year >= 2010 AND publish_year <= 2013$").
+	mock.ExpectQuery("^SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.publish_year >= 2010 AND b.publish_year <= 2013$").
 		WillReturnRows(rows)
 
-	req, err := http.NewRequest("GET", "/api/v1/books?from=2010&to=2013", nil)
+	req, err := http.NewRequest("GET", "/api/v2/books?from=2010&to=2013", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -113,7 +113,7 @@ func TestBookHandler_GetBookHandlerWithFilter(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `[{"id":1,"name":"Book 1","isbn":"1234567890","author":"Author 1","publishYear":2011},{"id":2,"name":"Book 2","isbn":"0987654321","author":"Author 2","publishYear":2012}]`
+	expected := `[{"id":1,"isbn":"1234567890","name":"Book 1","author":{"id":1,"name":"Capybara","birthDay":"01/01/2002"},"publishYear":2011},{"id":2,"isbn":"0987654321","name":"Book 2","author":{"id":2,"name":"Luffy","birthDay":"02/02/2002"},"publishYear":2012}]`
 	actual := rr.Body.String()
 
 	var expectedBooks []domain.Book
@@ -138,27 +138,26 @@ func TestBookHandler_GetBookByIdHandler(t *testing.T) {
 	}
 	defer db.Close()
 
-	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "author", "publish_year"}).
-		AddRow(1, "1234567890", "Book 1", "Author 1", "2011").
-		AddRow(2, "0987654321", "Book 2", "Author 2", "2012")
+	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "publish_year", "author_id", "author_name", "author_birthday"}).
+		AddRow(2, "0987654321", "Book 2", "2012", 2, "Luffy", "02/02/2002")
 
 	testBookRepository := repository.NewTestMemoryBookRepository(db)
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	req, err := http.NewRequest("GET", "/api/v1/books/2", nil)
+	req, err := http.NewRequest("GET", "/api/v2/books/2", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	mock.ExpectQuery("^SELECT \\* FROM book WHERE id = \\$1$").
+	mock.ExpectQuery("^SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = \\$1").
 		WithArgs(2).
 		WillReturnRows(rows)
 
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v1/books/{bookId}", bookHandler.GetBookByIdHandler)
+	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.GetBookByIdHandler)
 
 	// Serve the HTTP request to the mock handler
 	r.ServeHTTP(rr, req)
@@ -168,7 +167,7 @@ func TestBookHandler_GetBookByIdHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `{"id":2,"name":"Book 2","isbn":"0987654321","author":"Author 2","publishYear":2012}`
+	expected := `{"id":2,"isbn":"0987654321","name":"Book 2","author":{"id":2,"name":"Luffy","birthDay":"02/02/2002"},"publishYear":2012}`
 	actual := rr.Body.String()
 
 	var expectedBooks domain.Book
@@ -197,14 +196,21 @@ func TestBookHandler_CreateBookHandler(t *testing.T) {
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	mock.ExpectExec("^INSERT INTO book\\(isbn, name, author, publish_year\\) VALUES \\(\\$1, \\$2, \\$3, \\$4\\)$").
-		WithArgs("1234567890", "Book 1", "Author 1", 2010).
+	rows := sqlMock.NewRows([]string{"author_id", "author_name", "author_birthday"}).
+		AddRow(1, "Author 1", "01/01/2002")
+
+	book := `[{"name":"Book 1","isbn":"1234567890","author":"Author 1","publishYear":"2010"}]`
+	fmt.Println("payload: ", strings.NewReader(book))
+
+	mock.ExpectQuery("^SELECT \\* FROM author WHERE name = \\$1$").
+		WithArgs("Author 1").
+		WillReturnRows(rows)
+
+	mock.ExpectExec("^INSERT INTO book\\(isbn, name, publish_year, author_id\\) VALUES \\(\\$1, \\$2, \\$3, \\$4\\)$").
+		WithArgs("1234567890", "Book 1", 2010, 1).
 		WillReturnResult(sqlMock.NewResult(1, 1))
 
-	book := `[{"id":"1","name":"Book 1","isbn":"1234567890","author":"Author 1","publishYear":"2010"}]`
-
-	fmt.Println("payload: ", strings.NewReader(book))
-	req, err := http.NewRequest("POST", "/api/v1/books", strings.NewReader(book))
+	req, err := http.NewRequest("POST", "/api/v2/books", strings.NewReader(book))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +236,7 @@ func TestBookHandler_CreateBookHandler(t *testing.T) {
 		t.Errorf("error parsing response body: %v", err)
 	}
 
-	expected := `[{"id":0,"name":"Book 1","isbn":"1234567890","author":"Author 1","publishYear":2010}]`
+	expected := `[{"id":0,"name":"Book 1","isbn":"1234567890","author":{"id":0,"name":"Author 1","birthDay":""},"publishYear":2010}]`
 	var expectedBooks []domain.Book
 	if err := json.Unmarshal([]byte(expected), &expectedBooks); err != nil {
 		t.Errorf("error unmarshalling expected JSON: %v", err)
@@ -248,20 +254,19 @@ func TestBookHandler_DeleteBookByIdHandler(t *testing.T) {
 	}
 	defer db.Close()
 
-	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "author", "publish_year"}).
-		AddRow(1, "1234567890", "Book 1", "Author 1", "2011").
-		AddRow(2, "0987654321", "Book 2", "Author 2", "2012")
+	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "publish_year", "author_id", "author_name", "author_birthday"}).
+		AddRow(2, "0987654321", "Book 2", "2012", 2, "Luffy", "02/02/2002")
 
 	testBookRepository := repository.NewTestMemoryBookRepository(db)
 	bookService := service.NewBookService(testBookRepository)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	req, err := http.NewRequest("DELETE", "/api/v1/books/2", nil)
+	req, err := http.NewRequest("DELETE", "/api/v2/books/2", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	mock.ExpectQuery("^SELECT \\* FROM book WHERE id = \\$1$").
+	mock.ExpectQuery("^SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = \\$1$").
 		WithArgs(2).
 		WillReturnRows(rows)
 
@@ -272,7 +277,7 @@ func TestBookHandler_DeleteBookByIdHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v1/books/{bookId}", bookHandler.GetBookByIdHandler)
+	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.GetBookByIdHandler)
 
 	r.ServeHTTP(rr, req)
 
@@ -281,7 +286,7 @@ func TestBookHandler_DeleteBookByIdHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `{"id":2,"name":"Book 2","isbn":"0987654321","author":"Author 2","publishYear":2012}`
+	expected := `{"id":2,"name":"Book 2","isbn":"0987654321","author":{"id":2, "name":"Luffy", "birthDay":"02/02/2002"},"publishYear":2012}`
 	actual := rr.Body.String()
 
 	var expectedBooks domain.Book
@@ -306,9 +311,11 @@ func TestBookHandler_UpdateBookByIdHandler(t *testing.T) {
 	}
 	defer db.Close()
 
-	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "author", "publish_year"}).
-		AddRow(1, "1234567890", "Book 1", "Author 1", "2011").
-		AddRow(2, "0987654321", "Book 2", "Author 2", "2012")
+	rows := sqlMock.NewRows([]string{"id", "isbn", "name", "publish_year", "author_id", "author_name", "author_birthday"}).
+		AddRow(2, "0987654321", "Book 2", "2012", 2, "Luffy", "02/02/2002")
+
+	authorRow := sqlMock.NewRows([]string{"author_id", "author_name", "author_birthday"}).
+		AddRow(1, "Capybara", "01/01/2002")
 
 	testBookRepository := repository.NewTestMemoryBookRepository(db)
 	bookService := service.NewBookService(testBookRepository)
@@ -317,23 +324,27 @@ func TestBookHandler_UpdateBookByIdHandler(t *testing.T) {
 	book := `{"name":"Luffy","author":"Capybara"}`
 
 	fmt.Println("payload: ", strings.NewReader(book))
-	req, err := http.NewRequest("PUT", "/api/v1/books/2", strings.NewReader(book))
+	req, err := http.NewRequest("PUT", "/api/v2/books/2", strings.NewReader(book))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	mock.ExpectQuery("^SELECT \\* FROM book WHERE id = \\$1$").
+	mock.ExpectQuery("^SELECT b.id, b.isbn, b.name, b.publish_year, a.id, a.name, a.birth_day FROM book b JOIN author a ON b.author_id = a.id WHERE b.id = \\$1$").
 		WithArgs(2).
 		WillReturnRows(rows)
 
-	mock.ExpectExec("^UPDATE book SET name = 'Luffy', author = 'Capybara' WHERE id = \\$1$").
+	mock.ExpectQuery("^SELECT \\* FROM author WHERE name = \\$1$").
+		WithArgs("Capybara").
+		WillReturnRows(authorRow)
+
+	mock.ExpectExec("^UPDATE book SET name = 'Luffy', author_id = '1' WHERE id = \\$1$").
 		WithArgs(2).
 		WillReturnResult(sqlMock.NewResult(1, 1))
 
 	rr := httptest.NewRecorder()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/v1/books/{bookId}", bookHandler.UpdateBookByIdHandler)
+	r.HandleFunc("/api/v2/books/{bookId}", bookHandler.UpdateBookByIdHandler)
 
 	r.ServeHTTP(rr, req)
 
@@ -342,7 +353,7 @@ func TestBookHandler_UpdateBookByIdHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `{"id":2,"name":"Luffy","isbn":"0987654321","author":"Capybara","publishYear":2012}`
+	expected := `{"id":2,"name":"Luffy","isbn":"0987654321","author":{"id":1,"name":"Capybara","birthDay":"01/01/2002"},"publishYear":2012}`
 	actual := rr.Body.String()
 
 	var expectedBooks domain.Book
