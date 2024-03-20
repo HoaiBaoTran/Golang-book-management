@@ -42,7 +42,7 @@ func NewTestMemoryBookRepository(db *sql.DB) *MemoryBookRepository {
 
 func NewMemoryBookRepository() *MemoryBookRepository {
 	err := goDotEnv.Load(".env")
-	CheckError(err, "Can't load value from .env")
+	CheckError(err, "Can't load value from .env ")
 
 	config := &database.Config{
 		Host:     os.Getenv("DB_HOST"),
