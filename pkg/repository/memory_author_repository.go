@@ -14,6 +14,13 @@ type MemoryAuthorRepository struct {
 	DB      *sql.DB
 }
 
+func NewTestMemoryAuthorRepository(db *sql.DB) *MemoryAuthorRepository {
+	return &MemoryAuthorRepository{
+		authors: make(map[int]domain.Author, 0),
+		DB:      db,
+	}
+}
+
 func NewMemoryAuthorRepository() *MemoryAuthorRepository {
 	err := goDotEnv.Load(".env")
 	CheckError(err, "Can't load value from .env")

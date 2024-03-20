@@ -14,7 +14,7 @@ import (
 
 var (
 	MyLogger               = logger.InitLogger()
-	memoryAuthorRepository = NewMemoryAuthorRepository()
+	memoryAuthorRepository *MemoryAuthorRepository
 )
 
 type MemoryBookRepository struct {
@@ -34,7 +34,16 @@ func LogMessage(args ...interface{}) {
 	MyLogger.FileLogger.Infoln(args)
 }
 
+func NewTestMemoryBookRepository(db *sql.DB) *MemoryBookRepository {
+	memoryAuthorRepository = NewTestMemoryAuthorRepository(db)
+	return &MemoryBookRepository{
+		books: make(map[int]domain.Book, 0),
+		DB:    db,
+	}
+}
+
 func NewMemoryBookRepository() *MemoryBookRepository {
+	memoryAuthorRepository = NewMemoryAuthorRepository()
 	err := goDotEnv.Load(".env")
 	CheckError(err, "Can't load value from .env")
 

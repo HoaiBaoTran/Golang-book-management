@@ -2,7 +2,6 @@ package logger
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"time"
 
@@ -63,7 +62,8 @@ func getLogWriter() zapcore.WriteSyncer {
 	outputFileName := fmt.Sprintf("pkg/logger/logger-files/log_%s_%s.txt", current_date, current_time)
 	file, err := os.Create(outputFileName)
 	if err != nil {
-		log.Fatal("Can't open log file", err)
+		fmt.Println("Can't open log file", err)
+		// log.Fatal("Can't open log file", err)
 	}
 	return zapcore.AddSync(file)
 }
@@ -84,7 +84,8 @@ func InitConsoleLogger() *zap.SugaredLogger {
 	}
 	consoleLogger, err := cfg.Build()
 	if err != nil {
-		log.Fatal("Can't not create logger", err)
+		fmt.Println("Can't not create logger", err)
+		// log.Fatal("Can't not create logger", err)
 	}
 	return consoleLogger.Sugar()
 }
